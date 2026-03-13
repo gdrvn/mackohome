@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Biró András ingatlanközvetítő — Segítek megtalálni álmaid otthonát vagy ideális befektetésedet. Átlátható jutalék, teljes körű kísérés.">
+  <title>Biró András Ingatlanközvetítő | mackohome.hu</title>
+  <link rel="canonical" href="https://mackohome.hu">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── NAVIGÁCIÓ ─── -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Mackó<span>Home</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Főoldal</a></li>
+    <li><a onclick="showPage('rolunk')" id="nav-rolunk">Rólunk</a></li>
+    <li><a onclick="showPage('szolgaltatasok')" id="nav-szolgaltatasok">Szolgáltatások</a></li>
+    <li><a onclick="showPage('kapcsolat')" id="nav-kapcsolat">Kapcsolat</a></li>
+  </ul>
+  <div class="nav-cta" onclick="showPage('kapcsolat')">Kapcsolatfelvétel</div>
+  <div class="hamburger" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ─── MOBIL MENÜ ─── -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMenu()">✕</button>
+  <a onclick="showPage('home');closeMenu()">Főoldal</a>
+  <a onclick="showPage('rolunk');closeMenu()">Rólunk</a>
+  <a onclick="showPage('szolgaltatasok');closeMenu()">Szolgáltatások</a>
+  <a onclick="showPage('kapcsolat');closeMenu()">Kapcsolat</a>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FŐOLDAL
+═══════════════════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-left">
+      <div class="tag">Ingatlanközvetítő — Budapest</div>
+      <h1 class="hero-headline">
+        Álmaid otthona<br>vagy a tökéletes<br><em>befektetés.</em>
+      </h1>
+      <p class="hero-sub">
+        Biró András ingatlanközvetítőként segítek, hogy zökkenőmentesen juss hozzá a számodra legjobb ingatlanhoz — vásárlásban, eladásban egyaránt.
+      </p>
+      <div class="hero-actions">
+        <div class="btn-primary" onclick="showPage('kapcsolat')">Kapcsolatfelvétel</div>
+        <button class="btn-ghost" onclick="showPage('rolunk')">Megismerni</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-pattern"></div>
+      <!-- Cserélje ki valódi fotóra: <img src="images/hero.jpg" alt="Ingatlan" style="width:100%;height:100%;object-fit:cover;"> -->
+      <div class="hero-img-placeholder">
+        <div class="hero-img-icon">⌂</div>
+        <div class="hero-img-label">Fotó helye</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">3+ év</div>
+        <div class="hero-badge-label">Ingatlan.com-on</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust-row">
+    <div class="trust-item">
+      <div class="trust-icon">🏛️</div>
+      <div>
+        <div class="trust-text-main">Iparkamara tag</div>
+        <div class="trust-text-sub">Igazolt tagság</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">📋</div>
+      <div>
+        <div class="trust-text-main">Névjegyzéki tag</div>
+        <div class="trust-text-sub">Ingatlanközvetítői névjegyzék</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔑</div>
+      <div>
+        <div class="trust-text-main">Bruttó 2,5 – 4,5%</div>
+        <div class="trust-text-sub">Átlátható jutalék</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🤝</div>
+      <div>
+        <div class="trust-text-main">Teljes körű kísérés</div>
+        <div class="trust-text-sub">Első lépéstől az aláírásig</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-quote">
+    <div>
+      <div class="quote-mark">"</div>
+      <p class="quote-text">
+        Célom, hogy segítsek abban, hogy álmaid otthonához vagy az ideális befektetési lehetőséghez juss. Lehetőséget teremtek arra, hogy zökkenőmentesen lebonyolítsam az ingatlanügyeidet.
+      </p>
+      <div class="quote-author">— Biró András, ingatlanközvetítő</div>
+    </div>
+    <div class="intro-extras">
+      <div class="extras-title">Amiben még segíteni tudok</div>
+      <div class="extras-grid">
+        <div class="extra-chip">Energetikai tanúsító</div>
+        <div class="extra-chip">Földhivatali ügyintézés</div>
+        <div class="extra-chip">Hitelügyintézés</div>
+        <div class="extra-chip">Közjegyző</div>
+        <div class="extra-chip">Lakberendező</div>
+        <div class="extra-chip">Ügyvéd</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Mackó<span>Home</span> — Biró András Ingatlanközvetítő</div>
+    <div class="footer-copy">© 2025 mackohome.hu — Minden jog fenntartva.</div>
+  </footer>
+
+</div><!-- /page-home -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     RÓLUNK
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-rolunk">
+
+  <div class="about-hero">
+    <div class="about-hero-left">
+      <div class="tag">Rólam</div>
+      <h1 class="about-headline">Szakértelem,<br>amelyre <em>számíthatsz.</em></h1>
+      <p class="about-intro">
+        Biró András ingatlanközvetítőként évek tapasztalatával és hiteles szakmai tagságokkal segítek vásárlókat és eladókat céljaik elérésében — egyszerűen, átláthatóan.
+      </p>
+    </div>
+    <div class="about-hero-right">
+      <!-- Cserélje ki valódi portréfotóra: <img src="images/biro-andras.jpg" alt="Biró András" style="width:100%;height:100%;object-fit:cover;"> -->
+      <div class="portrait-box">
+        <div class="portrait-initials">BÁ</div>
+        <div class="portrait-label">Portréfotó helye</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="creds-bar">
+    <div class="cred-item">
+      <div class="cred-value">3+ év</div>
+      <div class="cred-label">Ingatlan.com-on aktív</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">2,5–4,5%</div>
+      <div class="cred-label">Bruttó jutalék</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">Iparkamara</div>
+      <div class="cred-label">Igazolt kamarai tagság</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">Névjegyzék</div>
+      <div class="cred-label">Ingatlanközvetítői névjegyzék</div>
+    </div>
+  </div>
+
+  <div class="about-body">
+    <div class="about-story">
+      <div class="tag" style="margin-bottom:1.5rem;">Így dolgozom</div>
+      <p>Biró András ingatlanközvetítő vagyok. Célom, hogy segítsek abban, hogy álmaid otthonához vagy az ideális befektetési lehetőséghez juss.</p>
+      <p>Az évek során szerzett tapasztalatom és szakértelmem segítségével lehetőséget teremtek arra, hogy zökkenőmentesen lebonyolítsam az ingatlanügyeidet — az első konzultációtól az adásvételi szerződés aláírásáig.</p>
+      <p><strong>Átlátható jutalék.</strong> Bruttó 2,5–4,5%-os jutalékkal dolgozom, rejtett költségek nélkül. Pontosan tudod, mire számíthatsz.</p>
+      <p>Tagja vagyok az Iparkamarának és szerepelek az Ingatlanközvetítői névjegyzékben — ez garantálja, hogy szakmailag ellenőrzött, megbízható közvetítővel dolgozol.</p>
+    </div>
+    <div>
+      <div class="tag" style="margin-bottom:1.5rem;">Megközelítésem</div>
+      <ul class="values-list">
+        <li class="value-item">
+          <div class="value-num">01</div>
+          <div>
+            <div class="value-title">Személyes figyelem</div>
+            <div class="value-desc">Minden ügyfelemet személyesen kísérem végig a folyamaton — nem asszisztens, hanem én magam.</div>
+          </div>
+        </li>
+        <li class="value-item">
+          <div class="value-num">02</div>
+          <div>
+            <div class="value-title">Átláthatóság</div>
+            <div class="value-desc">Nyílt kommunikáció, rejtett díjak nélkül. Előre tudod, mi a jutalék és mit kapsz érte.</div>
+          </div>
+        </li>
+        <li class="value-item">
+          <div class="value-num">03</div>
+          <div>
+            <div class="value-title">Teljes körű segítség</div>
+            <div class="value-desc">Az alapszolgáltatáson túl hitelügyintézőt, ügyvédet, közjegyzőt és energetikust is ajánlok.</div>
+          </div>
+        </li>
+        <li class="value-item">
+          <div class="value-num">04</div>
+          <div>
+            <div class="value-title">Gyors, zökkenőmentes</div>
+            <div class="value-desc">A papírmunkától a földhivatali ügyintézésig mindent koordinálok, hogy neked ne kelljen.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="memberships">
+    <div class="memberships-title">Tagságaim & akkreditációk</div>
+    <div class="memberships-row">
+      <div class="badge">Iparkamara</div>
+      <div class="badge">Ingatlanközvetítői névjegyzék</div>
+      <div class="badge">Ingatlan.com partner — 3+ év</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Mackó<span>Home</span> — Biró András Ingatlanközvetítő</div>
+    <div class="footer-copy">© 2025 mackohome.hu — Minden jog fenntartva.</div>
+  </footer>
+
+</div><!-- /page-rolunk -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SZOLGÁLTATÁSOK
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-szolgaltatasok">
+
+  <div class="services-hero">
+    <div class="services-hero-inner">
+      <div class="services-hero-tag">Amit kínálok</div>
+      <h1>Teljes körű ingatlan<em>kísérés</em></h1>
+      <p>Az első konzultációtól az adásvételi szerződés aláírásáig — és azon túl is. Vásárlásban, eladásban és minden kapcsolódó ügyintézésben.</p>
+    </div>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <div class="service-title">Ingatlan értékesítés</div>
+      <p class="service-desc">Segítek a legjobb áron és legrövidebb idő alatt eladni ingatlanodat — célzott hirdetéssel és tapasztalt tárgyalástechnikával.</p>
+      <ul class="service-features">
+        <li>Piaci árszakvélemény</li>
+        <li>Hirdetés az Ingatlan.com-on</li>
+        <li>Professzionális bemutatás</li>
+        <li>Vételár tárgyalás</li>
+        <li>Teljes adminisztráció</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <div class="service-title">Ingatlan vásárlás</div>
+      <p class="service-desc">Megtalálom az igényeidnek megfelelő ingatlant, végigkísérlek a megtekintéstől az aláírásig.</p>
+      <ul class="service-features">
+        <li>Igényfelmérés, keresés</li>
+        <li>Szemlék szervezése</li>
+        <li>Jogi és műszaki koordináció</li>
+        <li>Vételár egyeztetés</li>
+        <li>Szerződéskötés kísérése</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <div class="service-title">Befektetési tanácsadás</div>
+      <p class="service-desc">Ha ingatlanba fektetnél, segítek azonosítani a legjobb lehetőségeket és meghozni az átgondolt döntést.</p>
+      <ul class="service-features">
+        <li>Piac- és áralelemzés</li>
+        <li>Hozamszámítás</li>
+        <li>Kockázatértékelés</li>
+        <li>Befektetési stratégia</li>
+        <li>Hosszú távú szemlélet</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="partner-services">
+    <div class="tag" style="margin-bottom:1rem;">Kapcsolódó szolgáltatások</div>
+    <h2 class="section-title">Amiben még segíteni tudok</h2>
+    <p class="section-sub">Az ingatlanközvetítésen túl megbízható szakembereket ajánlok minden kapcsolódó ügyintézéshez, hogy az egész folyamat egy kézből, zökkenőmentesen fusson.</p>
+    <div class="partner-grid">
+      <div class="partner-card">
+        <div class="partner-icon">⚡</div>
+        <div class="partner-name">Energetikai tanúsító</div>
+        <div class="partner-desc">Adásvételhez kötelező energetikai tanúsítvány gyors elkészítése.</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">🏛️</div>
+        <div class="partner-name">Földhivatali ügyintézés</div>
+        <div class="partner-desc">Tulajdoni lap, bejegyzés, törlés — teljes körű földhivatali koordináció.</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">🏦</div>
+        <div class="partner-name">Hitelügyintézés</div>
+        <div class="partner-desc">Banki ajánlatok összehasonlítása, lakáshitel és CSOK ügyintézés segítése.</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">⚖️</div>
+        <div class="partner-name">Közjegyző</div>
+        <div class="partner-desc">Okiratok hitelesítése, közjegyzői aktus szervezése megbízható partnerrel.</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">🛋️</div>
+        <div class="partner-name">Lakberendező</div>
+        <div class="partner-desc">Home staging és lakberendezési tanácsadás a gyorsabb és jobb áras eladásért.</div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">📜</div>
+        <div class="partner-name">Ügyvéd</div>
+        <div class="partner-desc">Adásvételi szerződés szerkesztése, jogi tanácsadás megbízható ingatlanjogászon keresztül.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="services-cta">
+    <div>
+      <h2>Kérdése van?<br>Konzultáljunk!</h2>
+      <p>Vegyük fel a kapcsolatot egy ingyenes, kötelezettségmentes konzultációért. Megbeszéljük, hogyan tudok a legjobban segíteni.</p>
+    </div>
+    <div class="btn-primary" onclick="showPage('kapcsolat')" style="white-space:nowrap;">Ingyenes konzultáció →</div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Mackó<span>Home</span> — Biró András Ingatlanközvetítő</div>
+    <div class="footer-copy">© 2025 mackohome.hu — Minden jog fenntartva.</div>
+  </footer>
+
+</div><!-- /page-szolgaltatasok -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     KAPCSOLAT
+═══════════════════════════════════════════════════════════ -->
+<div class="page" id="page-kapcsolat">
+
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="contact-left-inner">
+        <div class="contact-tag">Kapcsolat</div>
+        <h1 class="contact-headline">
+          Keressük meg<br>együtt a legjobb<br><em>megoldást.</em>
+        </h1>
+        <p class="contact-subtext">
+          Legyen szó vásárlásról, eladásról vagy tájékozódásról — szívesen hallom. 24 órán belül személyesen visszajelzek.
+        </p>
+      </div>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-label">Profil</div>
+          <div class="contact-detail-value">
+            <a href="https://partner.ingatlan.com/biro.andras" target="_blank" rel="noopener">Ingatlan.com profil →</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Telefon</div>
+          <!-- TODO: Add real phone number -->
+          <div class="contact-detail-value">+36 — — — — — —</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">E-mail</div>
+          <!-- TODO: Add real email -->
+          <div class="contact-detail-value">info@mackohome.hu</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Jutalék</div>
+          <div class="contact-detail-value">Bruttó 2,5 – 4,5%</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Tagságok</div>
+          <div class="contact-detail-value">Iparkamara<br>Ingatlanközvetítői névjegyzék</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div id="contact-form-wrap">
+        <h2 class="form-title">Küldjön üzenetet</h2>
+        <p class="form-subtitle">Töltse ki az alábbi űrlapot, és hamarosan felveszem a kapcsolatot.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Keresztnév</label>
+            <input type="text" placeholder="Anna">
+          </div>
+          <div class="form-group">
+            <label>Vezetéknév</label>
+            <input type="text" placeholder="Kovács">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail cím</label>
+          <input type="email" placeholder="anna@example.hu">
+        </div>
+        <div class="form-group">
+          <label>Telefonszám (opcionális)</label>
+          <input type="tel" placeholder="+36 70 123 4567">
+        </div>
+        <div class="form-group">
+          <label>Miben segíthetek?</label>
+          <div class="interest-group">
+            <button class="interest-chip" onclick="toggleChip(this)">Vásárlás</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Eladás</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Befektetés</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Értékbecslés</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Egyéb</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Üzenet</label>
+          <textarea placeholder="Írja le röviden, miben segíthetek..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Üzenet küldése</button>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">✦</div>
+        <h3>Köszönöm megkeresését!</h3>
+        <p>Üzenetét megkaptam. 24 órán belül személyesen visszajelzek.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Mackó<span>Home</span> — Biró András Ingatlanközvetítő</div>
+    <div class="footer-copy">© 2025 mackohome.hu — Minden jog fenntartva.</div>
+  </footer>
+
+</div><!-- /page-kapcsolat -->
+
+
+<script src="script.js"></script>
+</body>
+</html>

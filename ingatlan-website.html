@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harlow Ingatlan — Prémium Ingatlanközvetítés</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #F7F4EF;
+  --warm-white: #FDFCFA;
+  --charcoal: #1C1C1A;
+  --mid: #6B6860;
+  --light: #B8B4AD;
+  --gold: #B89A6A;
+  --gold-light: #E8D9C0;
+  --border: rgba(28,28,26,0.1);
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--warm-white); color: var(--charcoal); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 4rem;
+  background: rgba(253,252,250,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: padding 0.3s;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem; font-weight: 400; letter-spacing: 0.02em;
+  color: var(--charcoal); text-decoration: none; cursor: pointer;
+}
+.nav-logo span { color: var(--gold); font-style: italic; }
+.nav-links { display: flex; gap: 2.6rem; list-style: none; }
+.nav-links a {
+  font-size: 0.78rem; font-weight: 400; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--mid); text-decoration: none;
+  transition: color 0.2s; cursor: pointer; position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 1px; background: var(--gold); transform: scaleX(0);
+  transition: transform 0.25s; transform-origin: left;
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-links a:hover, .nav-links a.active { color: var(--charcoal); }
+.nav-cta {
+  font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.55rem 1.5rem; border: 1px solid var(--charcoal);
+  color: var(--charcoal); text-decoration: none; cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+.nav-cta:hover { background: var(--charcoal); color: var(--warm-white); }
+
+/* Hamburger */
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { width: 24px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; display: block; }
+
+/* PAGES */
+.page { display: none; min-height: 100vh; animation: fadeIn 0.4s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ==================== FŐOLDAL ==================== */
+.hero {
+  min-height: 100vh; display: grid; grid-template-columns: 55% 45%;
+  padding-top: 72px;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 6rem 4rem; background: var(--cream); position: relative; overflow: hidden;
+}
+.hero-left::before {
+  content: 'IN'; font-family: 'Cormorant Garamond', serif;
+  font-size: 20rem; font-weight: 300; color: rgba(28,28,26,0.04);
+  position: absolute; right: -2rem; bottom: -2rem; line-height: 1; pointer-events: none;
+}
+.tag {
+  font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1.8rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.tag::before { content: ''; width: 36px; height: 1px; background: var(--gold); }
+.hero-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 4.5vw, 4.6rem);
+  font-weight: 300; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 1.4rem;
+}
+.hero-headline em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 0.92rem; line-height: 1.8; color: var(--mid); max-width: 380px; margin-bottom: 2.8rem;
+}
+.hero-actions { display: flex; gap: 1.2rem; align-items: center; }
+.btn-primary {
+  background: var(--charcoal); color: var(--warm-white);
+  padding: 0.85rem 2.2rem; font-size: 0.75rem; letter-spacing: 0.1em;
+  text-transform: uppercase; border: none; cursor: pointer;
+  transition: background 0.25s; text-decoration: none; display: inline-block;
+}
+.btn-primary:hover { background: var(--gold); }
+.btn-ghost {
+  color: var(--charcoal); font-size: 0.75rem; letter-spacing: 0.1em;
+  text-transform: uppercase; text-decoration: none; cursor: pointer;
+  display: flex; align-items: center; gap: 0.5rem; transition: gap 0.25s; background: none; border: none; font-family: 'DM Sans', sans-serif;
+}
+.btn-ghost:hover { gap: 0.9rem; }
+.btn-ghost::after { content: '→'; }
+.hero-right {
+  background: var(--charcoal); position: relative; overflow: hidden; min-height: 500px;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-pattern {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(184,154,106,0.05) 0px, rgba(184,154,106,0.05) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-45deg, rgba(184,154,106,0.05) 0px, rgba(184,154,106,0.05) 1px, transparent 1px, transparent 40px);
+}
+.hero-img-placeholder {
+  position: relative; z-index: 1; text-align: center;
+}
+.hero-img-icon { font-family: 'Cormorant Garamond', serif; font-size: 7rem; color: rgba(184,154,106,0.18); line-height: 1; }
+.hero-img-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253,252,250,0.2); margin-top: 0.8rem; }
+.hero-badge {
+  position: absolute; bottom: 2.5rem; left: 2.5rem;
+  background: rgba(253,252,250,0.96); padding: 1.1rem 1.5rem; min-width: 170px; z-index: 2;
+}
+.hero-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); line-height: 1; }
+.hero-badge-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-top: 0.3rem; }
+
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stat-item { padding: 2.2rem 4rem; border-right: 1px solid var(--border); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; line-height: 1; }
+.stat-num span { font-size: 1.2rem; color: var(--gold); }
+.stat-desc { font-size: 0.75rem; color: var(--mid); letter-spacing: 0.06em; margin-top: 0.4rem; }
+
+/* Listings */
+.section { padding: 6rem 4rem; }
+.section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.15; }
+.listings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.listing-card { background: var(--cream); overflow: hidden; transition: transform 0.3s; cursor: pointer; }
+.listing-card:hover { transform: translateY(-5px); }
+.listing-img-wrap { height: 200px; overflow: hidden; background: var(--charcoal); position: relative; display: flex; align-items: center; justify-content: center; }
+.listing-type-badge {
+  position: absolute; top: 1rem; left: 1rem;
+  font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--gold); color: var(--warm-white); padding: 0.28rem 0.75rem; z-index: 1;
+}
+.listing-icon { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; color: rgba(184,154,106,0.18); }
+.listing-body { padding: 1.4rem; }
+.listing-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.25rem; }
+.listing-addr { font-size: 0.8rem; color: var(--mid); margin-bottom: 0.9rem; }
+.listing-details { display: flex; gap: 1rem; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--light); text-transform: uppercase; }
+.listing-details span + span::before { content: '·'; margin-right: 0.4rem; }
+
+/* ==================== RÓLUNK ==================== */
+.about-hero { min-height: 60vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 72px; }
+.about-hero-left { padding: 5.5rem 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--cream); }
+.about-hero-right { background: var(--charcoal); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 400px; }
+.portrait-box { text-align: center; }
+.portrait-initials { font-family: 'Cormorant Garamond', serif; font-size: 7rem; font-weight: 300; color: rgba(184,154,106,0.25); line-height: 1; }
+.portrait-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253,252,250,0.25); margin-top: 0.8rem; }
+.about-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.6rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.4rem; }
+.about-intro { font-size: 0.92rem; line-height: 1.8; color: var(--mid); max-width: 430px; }
+
+.creds-bar {
+  background: var(--charcoal); padding: 3.5rem 4rem;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+}
+.cred-item { border-left: 1px solid rgba(255,255,255,0.08); padding-left: 2rem; }
+.cred-item:first-child { border-left: none; padding-left: 0; }
+.cred-value { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--gold-light); }
+.cred-label { font-size: 0.72rem; color: rgba(255,255,255,0.38); letter-spacing: 0.08em; margin-top: 0.3rem; }
+
+.about-body { padding: 5.5rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+.about-story p { font-size: 0.92rem; line-height: 1.88; color: var(--mid); margin-bottom: 1.1rem; }
+.about-story p strong { color: var(--charcoal); font-weight: 500; }
+.values-list { list-style: none; }
+.value-item { padding: 1.4rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1.2rem; }
+.value-num { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--gold); font-style: italic; min-width: 1.4rem; }
+.value-title { font-size: 0.83rem; font-weight: 500; letter-spacing: 0.03em; margin-bottom: 0.3rem; }
+.value-desc { font-size: 0.8rem; color: var(--mid); line-height: 1.6; }
+
+/* ==================== SZOLGÁLTATÁSOK ==================== */
+.services-hero {
+  padding-top: 72px; background: var(--charcoal); padding-bottom: 0;
+  min-height: 50vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; position: relative; overflow: hidden;
+}
+.services-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(0deg, rgba(184,154,106,0.04) 0px, rgba(184,154,106,0.04) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(90deg, rgba(184,154,106,0.04) 0px, rgba(184,154,106,0.04) 1px, transparent 1px, transparent 60px);
+}
+.services-hero-inner { position: relative; z-index: 1; padding: 5rem 4rem; max-width: 720px; }
+.services-hero-tag { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.services-hero-tag::before, .services-hero-tag::after { content: ''; width: 36px; height: 1px; background: var(--gold); }
+.services-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4.5vw, 4.2rem); font-weight: 300; color: var(--warm-white); line-height: 1.1; margin-bottom: 1.3rem; }
+.services-hero h1 em { color: var(--gold); font-style: italic; }
+.services-hero p { font-size: 0.92rem; color: rgba(253,252,250,0.55); line-height: 1.8; max-width: 520px; margin: 0 auto; }
+
+.services-grid { padding: 6rem 4rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+.service-card {
+  background: var(--warm-white); padding: 3rem 2.5rem;
+  transition: background 0.3s; cursor: default; position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.service-card:hover::before { transform: scaleX(1); }
+.service-card:hover { background: var(--cream); }
+.service-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--gold-light); line-height: 1; margin-bottom: 1.5rem; }
+.service-icon { font-size: 1.8rem; margin-bottom: 1rem; opacity: 0.6; }
+.service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.8rem; line-height: 1.2; }
+.service-desc { font-size: 0.84rem; color: var(--mid); line-height: 1.75; margin-bottom: 1.5rem; }
+.service-features { list-style: none; }
+.service-features li { font-size: 0.78rem; color: var(--mid); padding: 0.4rem 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.6rem; }
+.service-features li:last-child { border-bottom: none; }
+.service-features li::before { content: ''; width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+.services-cta {
+  background: var(--cream); padding: 6rem 4rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 3rem;
+}
+.services-cta-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.2; margin-bottom: 0.8rem; }
+.services-cta-text p { font-size: 0.88rem; color: var(--mid); max-width: 440px; line-height: 1.7; }
+.services-cta-btn { flex-shrink: 0; }
+
+/* ==================== KAPCSOLAT ==================== */
+.contact-wrap { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 72px; }
+.contact-left {
+  background: var(--charcoal); padding: 5.5rem 4rem;
+  display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden;
+}
+.contact-left::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(184,154,106,0.04) 0px, rgba(184,154,106,0.04) 1px, transparent 1px, transparent 80px),
+    repeating-linear-gradient(0deg, rgba(184,154,106,0.04) 0px, rgba(184,154,106,0.04) 1px, transparent 1px, transparent 80px);
+}
+.contact-left-inner { position: relative; z-index: 1; }
+.contact-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.6rem); font-weight: 300; color: var(--warm-white); line-height: 1.1; margin-bottom: 1.2rem; }
+.contact-headline em { color: var(--gold); font-style: italic; }
+.contact-subtext { font-size: 0.88rem; color: rgba(253,252,250,0.45); line-height: 1.78; max-width: 340px; }
+.contact-details { position: relative; z-index: 1; margin-top: 4rem; }
+.contact-detail { padding: 1.1rem 0; border-top: 1px solid rgba(255,255,255,0.07); display: flex; gap: 1.2rem; }
+.contact-detail-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); min-width: 80px; padding-top: 0.1rem; }
+.contact-detail-value { font-size: 0.88rem; color: rgba(253,252,250,0.7); line-height: 1.5; }
+.contact-right { padding: 5.5rem 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--warm-white); }
+.form-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 0.4rem; }
+.form-subtitle { font-size: 0.83rem; color: var(--mid); margin-bottom: 2.5rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { margin-bottom: 1.4rem; }
+label { display: block; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.45rem; }
+input, textarea, select {
+  width: 100%; padding: 0.8rem 1rem;
+  background: var(--cream); border: 1px solid transparent;
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--charcoal);
+  outline: none; transition: border-color 0.2s; appearance: none;
+}
+input:focus, textarea:focus, select:focus { border-color: var(--gold); }
+textarea { resize: none; min-height: 120px; }
+.interest-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+.interest-chip {
+  padding: 0.4rem 0.9rem; font-size: 0.72rem; letter-spacing: 0.06em;
+  border: 1px solid var(--border); color: var(--mid); background: transparent; cursor: pointer;
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.interest-chip.selected, .interest-chip:hover { border-color: var(--gold); color: var(--charcoal); background: var(--gold-light); }
+.submit-btn {
+  width: 100%; padding: 0.95rem; background: var(--charcoal); color: var(--warm-white);
+  border: none; font-family: 'DM Sans', sans-serif; font-size: 0.78rem;
+  letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.25s; margin-top: 0.3rem;
+}
+.submit-btn:hover { background: var(--gold); }
+.form-success { display: none; text-align: center; padding: 3rem 2rem; border: 1px solid var(--border); }
+.form-success-icon { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+.form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; margin-bottom: 0.5rem; }
+.form-success p { font-size: 0.83rem; color: var(--mid); }
+
+/* FOOTER */
+footer {
+  background: var(--charcoal); padding: 2.2rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: rgba(253,252,250,0.6); }
+.footer-logo span { color: var(--gold); font-style: italic; }
+.footer-copy { font-size: 0.7rem; color: rgba(253,252,250,0.28); letter-spacing: 0.06em; }
+
+/* MOBILE */
+@media (max-width: 960px) {
+  nav { padding: 1.1rem 1.5rem; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--charcoal); z-index: 200; display: none;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300;
+    color: var(--warm-white); text-decoration: none; cursor: pointer;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; color: rgba(253,252,250,0.5); cursor: pointer; background: none; border: none; }
+  .hero, .about-hero, .contact-wrap { grid-template-columns: 1fr; }
+  .hero-right, .about-hero-right { min-height: 300px; }
+  .hero-left, .about-hero-left, .contact-left, .contact-right { padding: 3.5rem 1.5rem; }
+  .section { padding: 3.5rem 1.5rem; }
+  .listings-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; gap: 1px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 1.8rem 1.5rem; }
+  .creds-bar { grid-template-columns: 1fr 1fr; padding: 2.5rem 1.5rem; gap: 2rem; }
+  .cred-item:nth-child(3) { border-left: none; padding-left: 0; }
+  .about-body { grid-template-columns: 1fr; padding: 3.5rem 1.5rem; gap: 3rem; }
+  .services-hero-inner { padding: 4rem 1.5rem; }
+  .services-cta { flex-direction: column; padding: 4rem 1.5rem; }
+  footer { flex-direction: column; gap: 0.8rem; text-align: center; padding: 2rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">Harlow <span>Ingatlan</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Főoldal</a></li>
+    <li><a onclick="showPage('rolunk')" id="nav-rolunk">Rólunk</a></li>
+    <li><a onclick="showPage('szolgaltatasok')" id="nav-szolgaltatasok">Szolgáltatások</a></li>
+    <li><a onclick="showPage('kapcsolat')" id="nav-kapcsolat">Kapcsolat</a></li>
+  </ul>
+  <div class="nav-cta" onclick="showPage('kapcsolat')">Kapcsolatfelvétel</div>
+  <div class="hamburger" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMenu()">✕</button>
+  <a onclick="showPage('home');closeMenu()">Főoldal</a>
+  <a onclick="showPage('rolunk');closeMenu()">Rólunk</a>
+  <a onclick="showPage('szolgaltatasok');closeMenu()">Szolgáltatások</a>
+  <a onclick="showPage('kapcsolat');closeMenu()">Kapcsolat</a>
+</div>
+
+<!-- ========== FŐOLDAL ========== -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="tag">Prémium Ingatlanközvetítés</div>
+      <h1 class="hero-headline">Találja meg<br><em>álmai</em><br>otthonát.</h1>
+      <p class="hero-sub">Budapest legjobb ingatlanjait kínáljuk igényes vevőknek és eladóknak — személyes, diszkrét és szakszerű kiszolgálással.</p>
+      <div class="hero-actions">
+        <div class="btn-primary" onclick="showPage('kapcsolat')">Kapcsolatfelvétel</div>
+        <button class="btn-ghost" onclick="showPage('rolunk')">Rólunk</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-pattern"></div>
+      <div class="hero-img-placeholder">
+        <!-- Cserélje ki valódi ingatlanfotóra -->
+        <div class="hero-img-icon">⌂</div>
+        <div class="hero-img-label">Főkép helye</div>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-num">240+</div>
+        <div class="hero-badge-label">Értékesített ingatlan</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-num">18<span> év</span></div>
+      <div class="stat-desc">Piaci tapasztalat</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">97<span>%</span></div>
+      <div class="stat-desc">Ügyfélelégedettség</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2,4<span> Mrd</span></div>
+      <div class="stat-desc">Összes forgalom (Ft)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="tag" style="margin-bottom:1rem;">Kiemelt ajánlatok</div>
+        <h2 class="section-title">Aktuális<br>ingatlanok</h2>
+      </div>
+      <button class="btn-ghost" onclick="showPage('kapcsolat')">Összes ajánlat</button>
+    </div>
+    <div class="listings-grid">
+      <div class="listing-card">
+        <div class="listing-img-wrap">
+          <div class="listing-type-badge">Eladó</div>
+          <div class="listing-icon">⌂</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">85 000 000 Ft</div>
+          <div class="listing-addr">1025 Budapest, II. kerület — Pasaréti út</div>
+          <div class="listing-details"><span>4 szoba</span><span>2 fürdő</span><span>120 m²</span></div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img-wrap">
+          <div class="listing-type-badge">Eladó</div>
+          <div class="listing-icon">⌂</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">62 500 000 Ft</div>
+          <div class="listing-addr">1122 Budapest, XII. kerület — Alkotás utca</div>
+          <div class="listing-details"><span>3 szoba</span><span>2 fürdő</span><span>88 m²</span></div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img-wrap">
+          <div class="listing-type-badge">Ajánlat alatt</div>
+          <div class="listing-icon">⌂</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">120 000 000 Ft</div>
+          <div class="listing-addr">1016 Budapest, I. kerület — Naphegy tér</div>
+          <div class="listing-details"><span>5 szoba</span><span>3 fürdő</span><span>195 m²</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Harlow <span>Ingatlan</span></div>
+    <div class="footer-copy">© 2025 Harlow Ingatlan. Minden jog fenntartva.</div>
+  </footer>
+</div>
+
+<!-- ========== RÓLUNK ========== -->
+<div class="page" id="page-rolunk">
+  <div class="about-hero">
+    <div class="about-hero-left">
+      <div class="tag">Rólunk</div>
+      <h1 class="about-headline">Megbízható tanácsadó.<br><em>Kiváló</em> eredmények.</h1>
+      <p class="about-intro">18 éves tapasztalattal Budapest prémium ingatlanpiacán, nevünk a diszkréció, a szakértelem és az ügyfelek teljes elégedettsége mellett forrt össze.</p>
+    </div>
+    <div class="about-hero-right">
+      <!-- Cserélje ki valódi portréfotóra -->
+      <div class="portrait-box">
+        <div class="portrait-initials">JH</div>
+        <div class="portrait-label">Portréfotó helye</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="creds-bar">
+    <div class="cred-item">
+      <div class="cred-value">2006</div>
+      <div class="cred-label">Alapítva</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">240+</div>
+      <div class="cred-label">Értékesített ingatlan</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">18 év</div>
+      <div class="cred-label">Piaci tapasztalat</div>
+    </div>
+    <div class="cred-item">
+      <div class="cred-value">MAISZ</div>
+      <div class="cred-label">Akkreditált tag</div>
+    </div>
+  </div>
+
+  <div class="about-body">
+    <div class="about-story">
+      <div class="tag" style="margin-bottom:1.5rem;">Történetünk</div>
+      <p>A Harlow Ingatlan 2006-ban alakult azzal a céllal, hogy Budapest prémium ingatlanpiacán személyes, szakértő és diszkrét közvetítői szolgáltatást nyújtson. Míg a nagy hálózatok sok ügyféllel dolgoznak párhuzamosan, mi egyszerre csak korlátozott számú megbízást vállalunk.</p>
+      <p>Ez azt jelenti, hogy minden vevő és eladó valóban személyes figyelmet kap — nem egy asszisztenst, hanem magát a vezető tanácsadót. Ismerünk mindenkit, aki számít: fejlesztőket, ügyvédeket, befektetőket és más közvetítőket.</p>
+      <p><strong>Diszkréció mindenekelőtt.</strong> Ügyfeleink jelentős része visszatérő vevő, befektető vagy Budapestre költöző külföldi família. A bizalom és a titoktartás minden kapcsolatunk alapja.</p>
+      <p>A nyilvánosan meghirdetett ingatlanokon túl széleskörű off-market hálózattal rendelkezünk — ezeket az ajánlatokat csak bevont ügyfeleinknek mutatjuk be.</p>
+    </div>
+    <div>
+      <div class="tag" style="margin-bottom:1.5rem;">Megközelítésünk</div>
+      <ul class="values-list">
+        <li class="value-item">
+          <div class="value-num">01</div>
+          <div>
+            <div class="value-title">Őszinte tanácsadás</div>
+            <div class="value-desc">Nem túlzott árazással nyerjük el a megbízást. Valós piaci adatokon alapuló, egyenes véleményt adunk.</div>
+          </div>
+        </li>
+        <li class="value-item">
+          <div class="value-num">02</div>
+          <div>
+            <div class="value-title">Boutique-szolgáltatás</div>
+            <div class="value-desc">Korlátozott ügyfélkörrel dolgozunk, hogy minden megbízást vezető tanácsadónk kezeljen személyesen.</div>
+          </div>
+        </li>
+        <li class="value-item">
+          <div class="value-num">03</div>
+          <div>
+            <div class="value-title">Mély piaci ismeret</div>
+            <div class="value-desc">18 év kapcsolatai — vevők, ügyvédek, fejlesztők — előnyt jelentenek minden tárgyaláson.</div>
+          </div>
+        </li>
+        <li class="value-item">
+          <div class="value-num">04</div>
+          <div>
+            <div class="value-title">Off-market hozzáférés</div>
+            <div class="value-desc">A legjobb ingatlanok sokszor nem kerülnek hirdetésbe. Hálózatunk ajtókat nyit, amelyeket mások nem tudnak.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Harlow <span>Ingatlan</span></div>
+    <div class="footer-copy">© 2025 Harlow Ingatlan. Minden jog fenntartva.</div>
+  </footer>
+</div>
+
+<!-- ========== SZOLGÁLTATÁSOK ========== -->
+<div class="page" id="page-szolgaltatasok">
+  <div class="services-hero">
+    <div class="services-hero-inner">
+      <div class="services-hero-tag">Amit kínálunk</div>
+      <h1>Teljes körű ingatlan<em>megoldások</em></h1>
+      <p>Az első konzultációtól az adásvétel aláírásáig — minden lépésnél ott vagyunk, hogy a folyamat gördülékeny, átlátható és eredményes legyen.</p>
+    </div>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <div class="service-title">Ingatlan értékesítés</div>
+      <p class="service-desc">Lakását a legmagasabb áron adjuk el — célzott marketinggel, gondosan válogatott vevőkörrel és tapasztalt tárgyalástechnikával.</p>
+      <ul class="service-features">
+        <li>Piaci árszakvélemény</li>
+        <li>Professzionális fotózás</li>
+        <li>Prémium hirdetési csomag</li>
+        <li>Off-market vevőkör</li>
+        <li>Teljes tárgyalási képviselet</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <div class="service-title">Ingatlan vásárlás</div>
+      <p class="service-desc">Megtaláljuk az Ön igényeire szabott ingatlant — beleértve azokat az ajánlatokat is, amelyek soha nem jelennek meg nyilvánosan.</p>
+      <ul class="service-features">
+        <li>Igényfelmérés és keresés</li>
+        <li>Off-market hozzáférés</li>
+        <li>Ingatlan szemlék szervezése</li>
+        <li>Jogi és műszaki koordináció</li>
+        <li>Vételár tárgyalás</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <div class="service-title">Ingatlan értékbecslés</div>
+      <p class="service-desc">Pontos, adatvezérelt értékbecslést készítünk — akár eladás előtt, akár befektetési döntéshez, akár hitelügyintézéshez.</p>
+      <ul class="service-features">
+        <li>Összehasonlító piacelemzés</li>
+        <li>Írott értékbecslési jelentés</li>
+        <li>Trendek és árvárakozások</li>
+        <li>Befektetési megtérülés-számítás</li>
+        <li>Gyors, 48 órás átfutás</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-number">04</div>
+      <div class="service-title">Befektetési tanácsadás</div>
+      <p class="service-desc">Segítünk felépíteni és fejleszteni Budapest legjobb negyedeiben lévő ingatlanportfólióját — hosszú távú szemlélettel.</p>
+      <ul class="service-features">
+        <li>Portfólió elemzés</li>
+        <li>Kerület- és piacválasztás</li>
+        <li>Hozam- és kockázatbecslés</li>
+        <li>Fejlesztői kapcsolatok</li>
+        <li>Exit stratégia tervezés</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-number">05</div>
+      <div class="service-title">Külföldi ügyfelek</div>
+      <p class="service-desc">Budapestre költöző külföldiek és nemzetközi befektetők számára teljes körű, angol és német nyelvű ingatlan-kísérés.</p>
+      <ul class="service-features">
+        <li>Angol / német ügyintézés</li>
+        <li>Jogszabályi tájékoztatás</li>
+        <li>Ügyvédi és közjegyzői kapcsolat</li>
+        <li>Banki és hitelügyintézés</li>
+        <li>Beköltözés utáni segítség</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <div class="service-number">06</div>
+      <div class="service-title">Bérbeadás & kezelés</div>
+      <p class="service-desc">Ha ingatlanját ki szeretné adni, megtaláljuk a megfelelő bérlőt és — igény esetén — gondoskodunk az ingatlan folyamatos kezeléséről is.</p>
+      <ul class="service-features">
+        <li>Bérlő szűrés és kiválasztás</li>
+        <li>Bérleti szerződés szerkesztés</li>
+        <li>Állapotfelmérés és átadás</li>
+        <li>Bérleti díj optimalizálás</li>
+        <li>Folyamatos üzemeltetés (opció)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="services-cta">
+    <div class="services-cta-text">
+      <h2>Kérdése van valamelyik<br>szolgáltatásunkról?</h2>
+      <p>Vegye fel velünk a kapcsolatot egy ingyenes, kötelezettségmentes konzultációért. Személyesen megbeszéljük, hogyan tudunk a legtöbbet segíteni az Ön helyzetében.</p>
+    </div>
+    <div class="services-cta-btn">
+      <div class="btn-primary" onclick="showPage('kapcsolat')" style="display:inline-block;white-space:nowrap;">Ingyenes konzultáció →</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Harlow <span>Ingatlan</span></div>
+    <div class="footer-copy">© 2025 Harlow Ingatlan. Minden jog fenntartva.</div>
+  </footer>
+</div>
+
+<!-- ========== KAPCSOLAT ========== -->
+<div class="page" id="page-kapcsolat">
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <div class="contact-left-inner">
+        <div class="tag" style="color:var(--gold);margin-bottom:1.5rem;">
+          <span style="width:30px;height:1px;background:var(--gold);display:inline-block;vertical-align:middle;margin-right:1rem;"></span>Kapcsolat
+        </div>
+        <h1 class="contact-headline">Keressük meg<br>együtt az <em>ideális</em><br>megoldást.</h1>
+        <p class="contact-subtext">Legyen szó vásárlásról, eladásról vagy csak piaci tájékozódásról — szívesen hallom Öntől. 24 órán belül személyesen válaszolok.</p>
+      </div>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="contact-detail-label">Telefon</div>
+          <div class="contact-detail-value">+36 1 234 5678</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">E-mail</div>
+          <div class="contact-detail-value">info@harlow-ingatlan.hu</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Iroda</div>
+          <div class="contact-detail-value">1012 Budapest, Márvány utca 8.</div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-label">Nyitvatartás</div>
+          <div class="contact-detail-value">H–P: 9:00 – 18:00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <div id="contact-form-wrap">
+        <h2 class="form-title">Küldjön üzenetet</h2>
+        <p class="form-subtitle">Töltse ki az alábbi űrlapot, és hamarosan felvesszük Önnel a kapcsolatot.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Keresztnév</label>
+            <input type="text" placeholder="Anna">
+          </div>
+          <div class="form-group">
+            <label>Vezetéknév</label>
+            <input type="text" placeholder="Kovács">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>E-mail cím</label>
+          <input type="email" placeholder="anna@example.hu">
+        </div>
+        <div class="form-group">
+          <label>Telefonszám (opcionális)</label>
+          <input type="tel" placeholder="+36 70 123 4567">
+        </div>
+        <div class="form-group">
+          <label>Miben segíthetünk?</label>
+          <div class="interest-group">
+            <button class="interest-chip" onclick="toggleChip(this)">Vásárlás</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Eladás</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Értékbecslés</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Befektetés</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Bérbeadás</button>
+            <button class="interest-chip" onclick="toggleChip(this)">Egyéb</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Üzenet</label>
+          <textarea placeholder="Írja le röviden, miben segíthetünk..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="submitForm()">Üzenet küldése</button>
+      </div>
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">✦</div>
+        <h3>Köszönjük megkeresését!</h3>
+        <p>Üzenetét megkaptuk. 24 órán belül személyesen válaszolunk.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Harlow <span>Ingatlan</span></div>
+    <div class="footer-copy">© 2025 Harlow Ingatlan. Minden jog fenntartva.</div>
+  </footer>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const navEl = document.getElementById('nav-' + name);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+function toggleChip(el) { el.classList.toggle('selected'); }
+function submitForm() {
+  document.getElementById('contact-form-wrap').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+function openMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+</script>
+</body>
+</html>
